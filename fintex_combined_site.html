@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FinTex Financial</title>
+<style>
+    body { font-family: 'Arial', sans-serif; margin: 0; background: #fff; color: #333; }
+    header, footer { background: #0a2a66; color: white; padding: 1rem 2rem; }
+    header nav a { color: white; margin: 0 1rem; text-decoration: none; }
+    .hero, .services, .faq, .quotes { padding: 2rem; }
+    .faq h3 { margin-top: 1.5rem; }
+    .button { background: #1e40af; color: white; padding: 0.75rem 1.5rem; border: none; border-radius: 6px; cursor: pointer; text-decoration: none; }
+  </style>
+</head>
+<body>
+<header>
+<h1>FinTex Financial</h1>
+<nav>
+<a href="#services">Services</a>
+<a href="#faq">FAQs</a>
+<a href="#quotes">Quotes</a>
+<a href="#login">Login</a>
+<a href="#application">Open an Account</a>
+</nav>
+</header>
+<section class="hero">
+<h2>Welcome to FinTex Financial</h2>
+<p>Empowering your future with smart, innovative, and secure financial services.</p>
+<a class="button" href="#application">Open an Account</a>
+</section>
+<section class="services" id="services">
+<h2>Our Services</h2>
+<ul>
+<li>Brokerage Accounts</li>
+<li>Market Insights</li>
+<li>Automated Investment Tools</li>
+<li>Financial Advisory</li>
+</ul>
+</section>
+<section class="faq" id="faq">
+<h2>Frequently Asked Questions</h2>
+<h3>What types of accounts can I open?</h3>
+<p>You can open Cash, Margin, and Retirement (IRA) accounts with FinTex.</p>
+<h3>What is a Cash Account?</h3>
+<p>A Cash Account allows you to buy securities using the funds you have deposited.</p>
+<h3>What is a Margin Account?</h3>
+<p>A Margin Account allows you to borrow money from FinTex to purchase securities.</p>
+<h3>What is an IRA?</h3>
+<p>An Individual Retirement Account (IRA) is a tax-advantaged investment account for retirement savings.</p>
+<h3>Are my securities insured?</h3>
+<p>Securities in your account are protected by SIPC up to applicable limits.</p>
+</section>
+<section class="quotes" id="quotes">
+<h2>Financial Quotes</h2>
+<blockquote>“Investing should be more like watching paint dry or watching grass grow. – Paul Samuelson”</blockquote>
+<blockquote>“Time in the market beats timing the market.”</blockquote>
+<blockquote>“An investment in knowledge pays the best interest. – Benjamin Franklin”</blockquote>
+</section>
+<!-- Application Form will be injected here -->
+<section id="application"><div class="container hidden" id="applicationForm">
+<h1 id="formTitle">New Account Application</h1>
+<p class="subtext">Section <span id="stepIndicator">1</span> of 9</p>
+<div class="tab-content" id="tabContent">
+<!-- Dynamic content will load here -->
+</div>
+</div></section>
+<footer>
+<p>© 2025 FinTex Financial. All rights reserved.</p>
+</footer>
+<script>
+    const sections = [
+      "Personal Information", "Employment Information", "Investment Profile", "Regulatory Items",
+      "Account Features", "Document Upload", "Disclosures and Signatures",
+      "Confirmations and Statements", "Review and Submit"
+    ];
+    let currentStep = 0;
+
+    function handleLogin(event) {
+      event.preventDefault();
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('dashboard').classList.remove('hidden');
+    }
+
+    function startApplication() {
+      document.getElementById('dashboard').classList.add('hidden');
+      document.getElementById('applicationForm').classList.remove('hidden');
+      updateFormStep();
+    }
+
+    function updateFormStep() {
+      document.getElementById('formTitle').textContent = sections[currentStep];
+      document.getElementById('stepIndicator').textContent = currentStep + 1;
+
+      let fields = '';
+      if (currentStep === 0) {
+  fields = `
+    <input type="text" placeholder="First Name" required />
+    <input type="text" placeholder="Middle Name" />
+    <input type="text" placeholder="Last Name" required />
+    <input type="date" placeholder="Enter Date of Birth" required />
+    <input type="number" placeholder="Number of Dependents*" required />
+    <input type="text" placeholder="Marital Status*" required />
+    <input type="email" placeholder="Email*" required />
+    <input type="tel" placeholder="Primary Telephone*" required />
+    <input type="tel" placeholder="Work Telephone" />
+    <label>Are you US Citizen?</label>
+    <div>
+      <input type="radio" name="citizen" value="yes" required /> Yes
+      <input type="radio" name="citizen" value="no" required /> No
+    </div>
+    <input type="text" placeholder="Citizenship country" />
+    <input type="text" placeholder="Tax country" />
+    <input type="text" placeholder="Tax Id Type*" required />
+    <input type="text" placeholder="Tax ID number" required />
+    <label>W8 Exempt</label>
+    <div>
+      <input type="checkbox" /> Yes
+    </div>
+    <input type="text" placeholder="Tax Lot Method" />
+    <input type="number" placeholder="Tax rate" />
+    <input type="text" placeholder="Select Id Type*" required />
+    <input type="text" placeholder="Id Number" required />
+    <input type="date" placeholder="Id Issue Date" required />
+    <input type="date" placeholder="Id Expiration Date" required />
+    <label>Account at other firm?</label>
+    <div>
+      <input type="radio" name="otherFirm" value="yes" required /> Yes
+      <input type="radio" name="otherFirm" value="no" required /> No
+    </div>
+    <input type="text" placeholder="Custodian" />
+    <label>Employee of firm?</label>
+    <div>
+      <input type="radio" name="employee" value="yes" required /> Yes
+      <input type="radio" name="employee" value="no" required /> No
+    </div>
+    <label>Officer of firm?</label>
+    <div>
+      <input type="radio" name="officer" value="yes" required /> Yes
+      <input type="radio" name="officer" value="no" required /> No
+    </div>
+    <input type="text" placeholder="Currency*" required />
+  `;
+} else if (currentStep === 1) {
+        fields = `
+          <input type="text" id="employer" placeholder="Employer" required />
+          <input type="text" id="years" placeholder="Years Employed" required />
+          <input type="text" id="position" placeholder="Position" required />
+        `;
+      } else {
+        fields = `
+          <input type="text" id="firstName" placeholder="First Name" required />
+          <input type="text" id="lastName" placeholder="Last Name" required />
+        `;
+      }
+
+      document.getElementById('tabContent').innerHTML = fields + `
+        <button onclick="nextStep()">${currentStep === sections.length - 1 ? 'Submit' : 'Next'}</button>
+      `;
+    }
+
+    function nextStep() {
+      const inputs = document.querySelectorAll('#tabContent input');
+      for (let input of inputs) {
+        if (!input.value.trim()) {
+          alert("Please complete all fields.");
+          return;
+        }
+      }
+
+      if (currentStep < sections.length - 1) {
+        currentStep++;
+        updateFormStep();
+      } else {
+        alert("Application submitted successfully!");
+        window.location.reload();
+      }
+    }
+  </script></body>
+</html>
